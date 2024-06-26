@@ -65,6 +65,12 @@
                 <MenuItem x:Name="MenuEditFont" Header="フォント変更" Icon="{ui:SymbolIcon TextFont20}"
                           Click="MenuEditFont_OnClick" />
             </ui:MenuItem>
+            <ui:MenuItem x:Name="MenuInput" Header="入力" Icon="{ui:SymbolIcon TextField24}">
+                <MenuItem x:Name="MenuInputDay" Header="日付" Icon="{ui:SymbolIcon CalendarEmpty24}"
+                          Click="MenuInputDay_OnClick" />
+                <MenuItem x:Name="MenuInputTime" Header="時刻" Icon="{ui:SymbolIcon AccessTime24}"
+                          Click="MenuInputTime_OnClick" />
+            </ui:MenuItem>
         </Menu>
         <ui:TextBox x:Name="Textbox" Grid.Row="2" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"
                     AcceptsTab="True" FontSize="16" AutoWordSelection="False" TextChanged="Textbox_OnTextChanged">

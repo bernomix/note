@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
@@ -189,6 +190,30 @@ namespace Note {
         Textbox.FontStyle = fontDialog.Font.Italic ? FontStyles.Italic : FontStyles.Normal;
         Textbox.FontWeight = fontDialog.Font.Bold ? FontWeights.Bold : FontWeights.Normal;
       }
+    }
+
+    #endregion
+
+    #region Input
+
+    private void MenuInputDay_OnClick(object sender, RoutedEventArgs e) {
+      string dateText = DateTime.Now.ToString("yyyy MM/dd");
+      int selectionStart = Textbox.SelectionStart;
+      int selectionLength = Textbox.SelectionLength;
+
+      Textbox.Text = Textbox.Text.Remove(selectionStart, selectionLength);
+      Textbox.Text = Textbox.Text.Insert(selectionStart, dateText);
+      Textbox.SelectionStart = selectionStart + dateText.Length;
+    }
+
+    private void MenuInputTime_OnClick(object sender, RoutedEventArgs e) {
+      string dateText = DateTime.Now.ToString("HH:mm:ss");
+      int selectionStart = Textbox.SelectionStart;
+      int selectionLength = Textbox.SelectionLength;
+
+      Textbox.Text = Textbox.Text.Remove(selectionStart, selectionLength);
+      Textbox.Text = Textbox.Text.Insert(selectionStart, dateText);
+      Textbox.SelectionStart = selectionStart + dateText.Length;
     }
 
     #endregion
