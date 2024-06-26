@@ -90,5 +90,8 @@
         <None Include="packages.config" />
         <None Include="note.png" />
     </ItemGroup>
+    <ItemGroup>
+      <Content Include=".gitignore" />
+    </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
 </Project>
