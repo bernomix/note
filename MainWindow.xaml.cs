@@ -30,8 +30,7 @@ namespace Note {
           MessageBoxImage.Warning);
         if (result == MessageBoxResult.Yes) {
           MenuFileSave_OnClick(this, new RoutedEventArgs());
-        }
-        else if (result == MessageBoxResult.Cancel) {
+        } else if (result == MessageBoxResult.Cancel) {
           return false;
         }
       }
@@ -39,6 +38,39 @@ namespace Note {
       return true;
     }
 
+    private void UpdateTextLength() {
+      string textForTextLength = Textbox.Text.Replace("\r\n", "").Replace("\n", "");
+      int textLength = textForTextLength.Length;
+      if (textLength >= 100000) {
+        StatusTextLength.Text = $"文字数：{textLength}（文字数制限に到達しました！）";
+      } else {
+        StatusTextLength.Text = $"文字数：{textLength}";
+      }
+
+      StatusProgressbar.Value = textLength;
+    }
+
+    private void UpdateFileName() {
+      if (_currentFilePath == string.Empty) {
+        StatusFileName.Text = "ファイルなし";
+      } else {
+        StatusFileName.Text = System.IO.Path.GetFileName(_currentFilePath);
+      }
+    }
+
+    private void UpdateLineColumn() {
+      int lineIndex = Textbox.GetLineIndexFromCharacterIndex(Textbox.CaretIndex) + 1;
+      int columnIndex = Textbox.CaretIndex -
+                        Textbox.GetCharacterIndexFromLineIndex(
+                          Textbox.GetLineIndexFromCharacterIndex(Textbox.CaretIndex));
+      StatusCursorLineColumn.Text = $"行 {lineIndex}, 列 {columnIndex}";
+    }
+
+    private void MainWindow_OnLoaded(object sender, RoutedEventArgs e) {
+      UpdateTextLength();
+      UpdateFileName();
+      UpdateLineColumn();
+    }
 
     private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
       if (!ConfirmSaveIfNeeded()) {
@@ -54,8 +86,15 @@ namespace Note {
         _undoStack.Push(Textbox.Text);
         _redoStack.Clear();
       }
+
+      UpdateTextLength();
+      UpdateFileName();
+      UpdateLineColumn();
     }
 
+    private void Textbox_OnSelectionChanged(object sender, RoutedEventArgs e) {
+      UpdateLineColumn();
+    }
 
     #region Menu
 
@@ -93,6 +132,9 @@ namespace Note {
 
       _currentFilePath = string.Empty;
       _isSaved = true;
+
+      UpdateFileName();
+      UpdateLineColumn();
     }
 
 
@@ -111,17 +153,22 @@ namespace Note {
 
         _isSaved = true;
       }
+
+      UpdateFileName();
+      UpdateLineColumn();
     }
 
 
     private void MenuFileSave_OnClick(object sender, RoutedEventArgs e) {
       if (string.IsNullOrEmpty(_currentFilePath)) {
         MenuFileSaveAs_OnClick(sender, e);
-      }
-      else {
+      } else {
         File.WriteAllText(_currentFilePath, Textbox.Text);
         _isSaved = true;
       }
+
+      UpdateFileName();
+      UpdateLineColumn();
     }
 
 
@@ -136,6 +183,9 @@ namespace Note {
 
         _isSaved = true;
       }
+
+      UpdateFileName();
+      UpdateLineColumn();
     }
 
     #endregion

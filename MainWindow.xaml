@@ -1,80 +1,90 @@
 ﻿<ui:FluentWindow
-    x:Class="Note.MainWindow"
-    x:Name="NoteMainFluentWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:"
-    xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    mc:Ignorable="d"
-    Title=""
-    Height="720"
-    Width="1280"
-    d:DesignHeight="720"
-    d:DesignWidth="1280"
-    ExtendsContentIntoTitleBar="True"
-    WindowBackdropType="None"
-    WindowCornerPreference="Round"
-    WindowStartupLocation="CenterScreen"
-    Closing="MainWindow_OnClosing">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <ui:TitleBar
-            x:Name="Titlebar"
-            Title="Note"
-            Grid.Row="0"
-            CloseWindowByDoubleClickOnIcon="True">
-        </ui:TitleBar>
-        <Menu x:Name="Menu" Grid.Row="1">
-            <MenuItem x:Name="MenuApplication" Header="アプリケーション" Icon="{ui:SymbolIcon Apps24}">
-                <ui:MenuItem x:Name="MenuApplicationAbout" Header="Noteについて" Icon="{ui:SymbolIcon WindowApps24}"
-                             Click="MenuApplicationAbout_OnClick" />
-                <ui:MenuItem x:Name="MenuApplicationAboutIcon" Header="アイコンについて" Icon="{ui:SymbolIcon Icons24}"
-                             Click="MenuApplicationAboutIcon_OnClick" />
-                <Separator x:Name="MenuApplicationSeparator1" />
-                <ui:MenuItem x:Name="MenuApplicationExit" Header="終了" Icon="{ui:SymbolIcon ArrowExit20}"
-                             Click="MenuApplicationExit_OnClick" />
-            </MenuItem>
-            <MenuItem x:Name="MenuFile" Header="ファイル" Icon="{ui:SymbolIcon Document24}">
-                <ui:MenuItem x:Name="MenuFileNew" Header="新しいファイル" Icon="{ui:SymbolIcon AddCircle24}"
-                             Click="MenuFileNew_OnClick" />
-                <ui:MenuItem x:Name="MenuFileOpen" Header="開く" Icon="{ui:SymbolIcon Open24}"
-                             Click="MenuFileOpen_OnClick" />
-                <ui:MenuItem x:Name="MenuFileSave" Header="保存" Icon="{ui:SymbolIcon Save24}"
-                             Click="MenuFileSave_OnClick" />
-                <ui:MenuItem x:Name="MenuFileSaveAs" Header="名前を付けて保存" Icon="{ui:SymbolIcon SaveEdit24}"
-                             Click="MenuFileSaveAs_OnClick" />
-            </MenuItem>
-            <ui:MenuItem x:Name="MenuEdit" Header="編集" Icon="{ui:SymbolIcon Edit24}">
-                <MenuItem x:Name="MenuEditUndo" Header="元に戻す" Icon="{ui:SymbolIcon ArrowUndo20}"
-                          Click="MenuEditUndo_OnClick" />
-                <MenuItem x:Name="MenuEditRedo" Header="やり直す" Icon="{ui:SymbolIcon ArrowRedo20}"
-                          Click="MenuEditRedo_OnClick" />
-                <Separator x:Name="MenuEditSeparator1" />
-                <MenuItem x:Name="MenuEditCut" Header="切り取り" Icon="{ui:SymbolIcon Cut20}" Click="MenuEditCut_OnClick" />
-                <MenuItem x:Name="MenuEditCopy" Header="コピー" Icon="{ui:SymbolIcon Copy20}" Click="MenuEditCopy_OnClick" />
-                <MenuItem x:Name="MenuEditPaste" Header="貼り付け" Icon="{ui:SymbolIcon ClipBoardPaste20}"
-                          Click="MenuEditPaste_OnClick" />
-                <Separator x:Name="MenuEditSeparator2" />
-                <MenuItem x:Name="MenuEditFont" Header="フォント変更" Icon="{ui:SymbolIcon TextFont20}"
-                          Click="MenuEditFont_OnClick" />
-            </ui:MenuItem>
-            <ui:MenuItem x:Name="MenuInput" Header="入力" Icon="{ui:SymbolIcon TextField24}">
-                <MenuItem x:Name="MenuInputDay" Header="日付" Icon="{ui:SymbolIcon CalendarEmpty24}"
-                          Click="MenuInputDay_OnClick" />
-                <MenuItem x:Name="MenuInputTime" Header="時刻" Icon="{ui:SymbolIcon AccessTime24}"
-                          Click="MenuInputTime_OnClick" />
-            </ui:MenuItem>
-        </Menu>
-        <ui:TextBox x:Name="Textbox" Grid.Row="2" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"
-                    AcceptsTab="True" FontSize="16" AutoWordSelection="False" TextChanged="Textbox_OnTextChanged">
-
-        </ui:TextBox>
-    </Grid>
+  x:Class="Note.MainWindow"
+  x:Name="NoteMainFluentWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:local="clr-namespace:"
+  xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"
+  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+  mc:Ignorable="d"
+  Title=""
+  Height="720"
+  Width="1280"
+  d:DesignHeight="720"
+  d:DesignWidth="1280"
+  ExtendsContentIntoTitleBar="True"
+  WindowBackdropType="None"
+  WindowCornerPreference="Round"
+  WindowStartupLocation="CenterScreen"
+  Closing="MainWindow_OnClosing"
+  Loaded="MainWindow_OnLoaded">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <ui:TitleBar
+      x:Name="Titlebar"
+      Title="Note"
+      Grid.Row="0"
+      CloseWindowByDoubleClickOnIcon="True">
+    </ui:TitleBar>
+    <Menu x:Name="Menu" Grid.Row="1">
+      <MenuItem x:Name="MenuApplication" Header="アプリケーション" Icon="{ui:SymbolIcon Apps24}">
+        <ui:MenuItem x:Name="MenuApplicationAbout" Header="Noteについて" Icon="{ui:SymbolIcon WindowApps24}"
+                     Click="MenuApplicationAbout_OnClick" />
+        <ui:MenuItem x:Name="MenuApplicationAboutIcon" Header="アイコンについて" Icon="{ui:SymbolIcon Icons24}"
+                     Click="MenuApplicationAboutIcon_OnClick" />
+        <Separator x:Name="MenuApplicationSeparator1" />
+        <ui:MenuItem x:Name="MenuApplicationExit" Header="終了" Icon="{ui:SymbolIcon ArrowExit20}"
+                     Click="MenuApplicationExit_OnClick" />
+      </MenuItem>
+      <MenuItem x:Name="MenuFile" Header="ファイル" Icon="{ui:SymbolIcon Document24}">
+        <ui:MenuItem x:Name="MenuFileNew" Header="新しいファイル" Icon="{ui:SymbolIcon AddCircle24}"
+                     Click="MenuFileNew_OnClick" />
+        <ui:MenuItem x:Name="MenuFileOpen" Header="開く" Icon="{ui:SymbolIcon Open24}"
+                     Click="MenuFileOpen_OnClick" />
+        <ui:MenuItem x:Name="MenuFileSave" Header="保存" Icon="{ui:SymbolIcon Save24}"
+                     Click="MenuFileSave_OnClick" />
+        <ui:MenuItem x:Name="MenuFileSaveAs" Header="名前を付けて保存" Icon="{ui:SymbolIcon SaveEdit24}"
+                     Click="MenuFileSaveAs_OnClick" />
+      </MenuItem>
+      <ui:MenuItem x:Name="MenuEdit" Header="編集" Icon="{ui:SymbolIcon Edit24}">
+        <MenuItem x:Name="MenuEditUndo" Header="元に戻す" Icon="{ui:SymbolIcon ArrowUndo20}"
+                  Click="MenuEditUndo_OnClick" />
+        <MenuItem x:Name="MenuEditRedo" Header="やり直す" Icon="{ui:SymbolIcon ArrowRedo20}"
+                  Click="MenuEditRedo_OnClick" />
+        <Separator x:Name="MenuEditSeparator1" />
+        <MenuItem x:Name="MenuEditCut" Header="切り取り" Icon="{ui:SymbolIcon Cut20}" Click="MenuEditCut_OnClick" />
+        <MenuItem x:Name="MenuEditCopy" Header="コピー" Icon="{ui:SymbolIcon Copy20}" Click="MenuEditCopy_OnClick" />
+        <MenuItem x:Name="MenuEditPaste" Header="貼り付け" Icon="{ui:SymbolIcon ClipBoardPaste20}"
+                  Click="MenuEditPaste_OnClick" />
+        <Separator x:Name="MenuEditSeparator2" />
+        <MenuItem x:Name="MenuEditFont" Header="フォント変更" Icon="{ui:SymbolIcon TextFont20}"
+                  Click="MenuEditFont_OnClick" />
+      </ui:MenuItem>
+      <ui:MenuItem x:Name="MenuInput" Header="入力" Icon="{ui:SymbolIcon TextField24}">
+        <MenuItem x:Name="MenuInputDay" Header="日付" Icon="{ui:SymbolIcon CalendarEmpty24}"
+                  Click="MenuInputDay_OnClick" />
+        <MenuItem x:Name="MenuInputTime" Header="時刻" Icon="{ui:SymbolIcon AccessTime24}"
+                  Click="MenuInputTime_OnClick" />
+      </ui:MenuItem>
+    </Menu>
+    <ui:TextBox x:Name="Textbox" Grid.Row="2" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"
+                AcceptsTab="True" FontSize="16" AutoWordSelection="False" TextWrapping="Wrap" TextChanged="Textbox_OnTextChanged"
+                MaxLength="100000" SelectionChanged="Textbox_OnSelectionChanged" />
+    <StatusBar x:Name="BottomStatusbar" Grid.Row="3">
+      <ui:TextBlock x:Name="StatusCursorLineColumn" Text="行と列を取得できませんでした。 " />
+      <Separator />
+      <ui:TextBlock x:Name="StatusTextLength" Text="文字数を取得できませんでした。" />
+      <Separator />
+      <ui:TextBlock x:Name="StatusFileName" Text="ファイル名を取得できませんでした。" />
+      <Separator />
+      <ProgressBar x:Name="StatusProgressbar" Minimum="0" Maximum="100000" Width="250" />
+    </StatusBar>
+  </Grid>
 </ui:FluentWindow>
