@@ -54,7 +54,7 @@ namespace Note {
       if (_currentFilePath == string.Empty) {
         StatusFileName.Text = "ファイルなし";
       } else {
-        StatusFileName.Text = System.IO.Path.GetFileName(_currentFilePath);
+        StatusFileName.Text = Path.GetFileName(_currentFilePath);
       }
     }
 
@@ -75,7 +75,6 @@ namespace Note {
     private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
       if (!ConfirmSaveIfNeeded()) {
         e.Cancel = true;
-        return;
       }
     }
 

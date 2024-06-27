@@ -75,7 +75,8 @@
       </ui:MenuItem>
     </Menu>
     <ui:TextBox x:Name="Textbox" Grid.Row="2" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"
-                AcceptsTab="True" FontSize="16" AutoWordSelection="False" TextWrapping="Wrap" TextChanged="Textbox_OnTextChanged"
+                AcceptsTab="True" FontSize="16" AutoWordSelection="False" TextWrapping="Wrap"
+                TextChanged="Textbox_OnTextChanged"
                 MaxLength="100000" SelectionChanged="Textbox_OnSelectionChanged" />
     <StatusBar x:Name="BottomStatusbar" Grid.Row="3">
       <ui:TextBlock x:Name="StatusCursorLineColumn" Text="行と列を取得できませんでした。 " />
